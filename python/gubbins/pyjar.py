@@ -757,6 +757,10 @@ def reconstruct_alignment_column(column_indices,
     print_file.close()
     mem_start = psutil.Process(os.getpid()).memory_info().rss / 1024 ** 3
     tim_start = datetime.datetime.now()
+    proc_name = str(multiprocessing.current_process())
+    jit_name = "jit_array" + proc_name.split("=")[1].split("'")[1] + ".npy"
+    with open(jit_name, "wb") as f:
+        numpy.save(column_positions, allow_pickle=True)
     iterate_over_base_patterns(columns,
                                 column_positions,
                                 Lmat,
