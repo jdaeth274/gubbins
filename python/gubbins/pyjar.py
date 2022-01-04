@@ -412,7 +412,7 @@ def get_columns(base_pattern_columns_padded,column_positions,column_index):
 #                 numba.uint8[:],
 #                 numba.int32[:]),
 #                 cache=True)
-@jit(nopython=False)
+@jit(forceobj=True)
 def iterate_over_base_patterns(columns,
                                 column_positions,
                                 Lmat,
