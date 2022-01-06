@@ -412,7 +412,7 @@ def get_columns(base_pattern_columns_padded,column_positions,column_index):
 #                 numba.uint8[:],
 #                 numba.int32[:]),
 #                 cache=True)
-@njit
+@jit(forceobject = True)
 def iterate_over_base_patterns(columns,
                                 column_positions,
                                 Lmat,
@@ -948,7 +948,6 @@ def jar(alignment = None,
     print_file.write("|/-\|/-\||/-\|/-\||/-\|/-\||/-\|/-\|" + "\n")
     print_file.write("Alignment array creation " + str(datetime.datetime.now()) + "\n")
     print_file.write("Start mem usage (GB): " + str(psutil.Process(os.getpid()).memory_info().rss / 1024 ** 3)+ "\n")
-    
     print_file.close()
     
     new_aln_array = numpy.full((len(alignment[0]),len(ancestral_node_indices)), '?', dtype = 'U1')
