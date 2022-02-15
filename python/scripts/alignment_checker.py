@@ -70,8 +70,8 @@ def main(input_args):
 
 
     iso_dat = pandas.DataFrame(row_data, columns=['a','A','t','T','c','C',
-                                                  'g','G','N','dash'])
-    iso_dat.insert(0,"Isolate",iso_data)
+                                                  'g','G','N','gap'])
+    iso_dat.insert(0,"isolate",iso_data)
 
     iso_dat.to_csv(path_or_buf=(input_args.out + ".csv"), index=False)
 
