@@ -901,16 +901,20 @@ def jar(sequence_names = None,
         aln_line = numpy.full(len(out_aln[:,0]),"?",dtype="U1")
         if verbose:
             print("Printing alignment with internal node sequences: ", output_prefix+".joint.aln")
+        print("1")
         source = alignment_filename
+        print("2")
         destination = output_prefix+".joint.aln"
+        print("3")
         dest = shutil.copy(source, destination)
+        print("4")
         with open(dest, "a") as asr_output:
             for i,node_index in enumerate(ancestral_node_order):
                 taxon = ancestral_node_indices[node_index]
                 asr_output.write('>' + taxon + '\n')
                 int_to_seq(out_aln[:,i], aln_line)
                 asr_output.write(''.join(aln_line) + "\n")
-
+        print("5")
         # Combine results for each base across the alignment
         for node in tree.preorder_node_iter():
             node.edge_length = 0.0 # reset lengths to convert to SNPs
@@ -920,10 +924,10 @@ def jar(sequence_names = None,
                     node.edge_length += reconstruction_results[x][node_index];
                 except AttributeError:
                     continue
-
+        print("6")
         # Print tree
         from gubbins.common import tree_as_string
-        
+        print("7")
         if verbose:
             print("Printing tree with internal nodes labelled: ", output_prefix+".joint.tre")
         with open(output_prefix+".joint.tre", "w") as tree_output:
